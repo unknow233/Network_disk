@@ -1,6 +1,6 @@
 #include "TcpClient.h"
 
-
+#include<QDebug>
 #include"INetMediator.h"
 
 
@@ -59,6 +59,7 @@ bool TcpClient::InitNet(const char *szBufIP, unsigned short port)
 	
 	if( connect( m_sock ,(const sockaddr* ) &addr , sizeof(addr) ) == SOCKET_ERROR )
 	{
+        qDebug()<<"connect()";
 		UnInitNet();
         return false;
 	}

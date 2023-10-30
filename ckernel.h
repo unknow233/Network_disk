@@ -3,6 +3,8 @@
 #include"maindialog.h"
 #include<QDebug>
 #include <QObject>
+#include"TcpClientMediator.h"
+#include"TcpServerMediator.h"
 //单例模式
 class Ckernel : public QObject
 {
@@ -25,9 +27,12 @@ private:
     MainDialog* m_maindialog;
     QString m_ip;
     QString m_port;
+    TcpClientMediator* m_clientMediator;
+    TcpServerMediator* m_serverMediator;
 private slots:
     void slot_close();
-
+    void slot_ReadyData( unsigned int lSendIP , char* buf , int nlen );
+    void slot_disConnect();
 };
 
 #endif // CKERNEL_H

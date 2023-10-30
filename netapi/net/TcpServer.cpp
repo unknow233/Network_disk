@@ -1,6 +1,6 @@
 #include "TcpServer.h"
 #include"INetMediator.h"
-
+#include"QDebug"
 
 TcpServer::TcpServer( INetMediator * pMediator ):m_sock( INVALID_SOCKET ),m_isStop(false)
 {
@@ -109,6 +109,7 @@ unsigned int __stdcall TcpServer::AcceptThread( void * lpvoid)
 
 		pthis->m_mapThreadIdToSocket[threadID] = sockWaiter;
 	}
+   cout<<1;
 	return 0;
 }
 

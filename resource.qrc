@@ -1,0 +1,18 @@
+<RCC>
+    <qresource prefix="/">
+        <file>resouce/images/logo.ico</file>
+        <file>resouce/images/addFile.png</file>
+        <file>resouce/images/Cancel_32x32.png</file>
+        <file>resouce/images/check.png</file>
+        <file>resouce/images/CheckBox_32x32.png</file>
+        <file>resouce/images/delete.png</file>
+        <file>resouce/images/file.png</file>
+        <file>resouce/images/folder.png</file>
+        <file>resouce/images/pause.png</file>
+        <file>resouce/images/play.png</file>
+        <file>resouce/images/search.png</file>
+        <file>resouce/images/share.png</file>
+        <file>resouce/images/transmit.ico</file>
+        <file>resouce/face/btn_avatar_a0.png</file>
+    </qresource>
+</RCC>

@@ -151,7 +151,10 @@ void TcpServer::UnInitNet()
 //发送 : 同时兼容tcp udp 
 bool TcpServer::SendData(unsigned int lSendIP , char* szbuf , int nlen )
 {
-    if( !szbuf|| nlen <= 0 ) return false;
+    if( !szbuf|| nlen <= 0 )
+    {
+        return false;
+    }
 
 	//防止粘包  策略: 先发包大小 再发数据包
 	// m_sock  <--> lSendIP
@@ -212,6 +215,7 @@ void TcpServer::RecvData()
 				offset += nRes;
 			}
 		}
+        qDebug()<<"2";
 		this->m_pMediator->DealData( sockWaiter , buf , offset  );  //需要在这个函数回收 堆区 空间
 	}
 }

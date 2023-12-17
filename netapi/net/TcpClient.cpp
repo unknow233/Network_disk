@@ -203,7 +203,7 @@ void TcpClient::RecvData()
 				nPackSize -= nRes;
 				offset += nRes;
 			}
-		}
+        }
 		this->m_pMediator->DealData( m_sock , buf , offset  );  //需要在这个函数回收 堆区 空间
 	}
 }

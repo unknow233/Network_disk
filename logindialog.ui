@@ -54,7 +54,7 @@
     </rect>
    </property>
    <property name="currentIndex">
-    <number>1</number>
+    <number>0</number>
    </property>
    <widget class="QWidget" name="tb_login">
     <attribute name="title">
@@ -72,6 +72,9 @@
      <layout class="QGridLayout" name="gridLayout">
       <item row="1" column="1">
        <widget class="QLineEdit" name="le_password_login">
+        <property name="text">
+         <string>STLstl666</string>
+        </property>
         <property name="echoMode">
          <enum>QLineEdit::Password</enum>
         </property>
@@ -92,7 +95,11 @@
        </widget>
       </item>
       <item row="0" column="1">
-       <widget class="QLineEdit" name="le_tel_login"/>
+       <widget class="QLineEdit" name="le_tel_login">
+        <property name="text">
+         <string>17676462275</string>
+        </property>
+       </widget>
       </item>
      </layout>
     </widget>

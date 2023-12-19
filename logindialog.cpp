@@ -1,6 +1,7 @@
 #include "logindialog.h"
 #include "ui_logindialog.h"
 #include<QMessageBox>
+#include<QCloseEvent>
 #include<QRegularExpression>
 LoginDialog::LoginDialog(QWidget *parent) :
     QDialog(parent),
@@ -12,6 +13,18 @@ LoginDialog::LoginDialog(QWidget *parent) :
 LoginDialog::~LoginDialog()
 {
     delete ui;
+}
+
+void LoginDialog::closeEvent(QCloseEvent *event)
+{
+    //确认关闭窗口
+    if(QMessageBox::Yes==QMessageBox::question(this,"窗口","是否确认关闭")){
+        event->accept();
+        SIG_loginClose();
+        //TODO:信号绑定
+    }else{
+        event->ignore();
+    }
 }
 
 void LoginDialog::on_pb_clean_regist_clicked()

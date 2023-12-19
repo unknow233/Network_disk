@@ -17,6 +17,15 @@ public:
     void closeEvent(QCloseEvent *) override;
 signals:
     void SIG_close();
+private slots:
+    void on_pb_file_clicked();
+
+    void on_pb_share_clicked();
+
+    void on_pb_translate_clicked();
+
+    void on_pb_favorite_clicked();
+
 private:
     Ui::MainDialog *ui;
 };

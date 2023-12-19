@@ -14,9 +14,11 @@ class LoginDialog : public QDialog
 public:
     explicit LoginDialog(QWidget *parent = nullptr);
     ~LoginDialog();
+    void closeEvent(QCloseEvent *) override;
 signals:
     void SIG_REGIST(QString name,QString tel,QString password);
     void SIG_LOGIN(QString tel,QString password);
+    void SIG_loginClose();
 private slots:
     void on_pb_clean_regist_clicked();
 

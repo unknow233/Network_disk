@@ -7,6 +7,9 @@ MainDialog::MainDialog(QWidget *parent)
     , ui(new Ui::MainDialog)
 {
     ui->setupUi(this);
+    //为其设置默认的窗口
+    ui->sw_page->setCurrentIndex(0);
+    ui->tw_translate->setCornerWidget(0);
 }
 
 MainDialog::~MainDialog()
@@ -20,8 +23,33 @@ void MainDialog::closeEvent(QCloseEvent *event)
     if(QMessageBox::Yes==QMessageBox::question(this,"窗口","是否确认关闭")){
         event->accept();
         SIG_close();
+
     }else{
         event->ignore();
     }
+}
+
+
+void MainDialog::on_pb_file_clicked()
+{
+    ui->sw_page->setCurrentIndex(0);
+}
+
+
+void MainDialog::on_pb_share_clicked()
+{
+ ui->sw_page->setCurrentIndex(1);
+}
+
+
+void MainDialog::on_pb_translate_clicked()
+{
+ ui->sw_page->setCurrentIndex(2);
+}
+
+
+void MainDialog::on_pb_favorite_clicked()
+{
+ ui->sw_page->setCurrentIndex(3);
 }
 

@@ -11,9 +11,10 @@
 Ckernel::Ckernel(QObject *parent) : QObject(parent)
 {
     m_maindialog=new MainDialog;
-    //绑定信号
-    connect(m_maindialog,SIGNAL(SIG_close()),
-            this,SLOT(slot_close()));
+    //TODO:绑定信号,区分Logindialog和maindialog的信号和槽
+    //注释代码需要改动
+    //connect(m_maindialog,SIGNAL(SIG_close()),
+            //this,SLOT(slot_close()));
     //创建中介者对象
     #ifdef server
     m_serverMediator=new TcpServerMediator;
@@ -124,8 +125,12 @@ void Ckernel::DealLoginRs(unsigned int lSendIP, char *buf, int nlen)
     case user_not_exist:
         QMessageBox::about(m_ploginWindow,"提示","用户不存在");
         break;
-    case login_success:
+    case login_success:{
         QMessageBox::about(m_ploginWindow,"提示","登录成功");
+        m_maindialog->show();
+    }
+
+
         break;
     case password_error:
         QMessageBox::about(m_ploginWindow,"提示","密码错误,请重新输入");

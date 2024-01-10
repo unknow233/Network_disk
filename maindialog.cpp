@@ -9,7 +9,7 @@ MainDialog::MainDialog(QWidget *parent)
     ui->setupUi(this);
     //为其设置默认的窗口
     ui->sw_page->setCurrentIndex(0);
-    ui->tw_translate->setCornerWidget(0);
+    ui->tw_translate->setCurrentIndex(1);
 }
 
 MainDialog::~MainDialog()

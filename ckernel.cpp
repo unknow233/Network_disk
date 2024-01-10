@@ -10,11 +10,13 @@
 
 Ckernel::Ckernel(QObject *parent) : QObject(parent)
 {
-    m_maindialog=new MainDialog;
-    //TODO:绑定信号,区分Logindialog和maindialog的信号和槽
+    //m_maindialog=new MainDialog;//放在这里会导致只允许一个用户登录
+    //正常情况应该是再登录成功以后再创建
     //注释代码需要改动
-    //connect(m_maindialog,SIGNAL(SIG_close()),
-            //this,SLOT(slot_close()));
+    connect(m_maindialog,SIGNAL(SIG_close()),
+            this,SLOT(slot_mainClose()));
+    connect(m_ploginWindow,SIGNAL(SIG_loginClose()),
+            this,SLOT(slot_loginClose()));
     //创建中介者对象
     #ifdef server
     m_serverMediator=new TcpServerMediator;
@@ -127,10 +129,11 @@ void Ckernel::DealLoginRs(unsigned int lSendIP, char *buf, int nlen)
         break;
     case login_success:{
         QMessageBox::about(m_ploginWindow,"提示","登录成功");
+        m_maindialog=new MainDialog;
+        m_maindialog->setWindowTitle("网盘");
+        m_maindialog->setWindowFlags(Qt::WindowMinMaxButtonsHint|Qt::WindowCloseButtonHint);
         m_maindialog->show();
-    }
-
-
+}
         break;
     case password_error:
         QMessageBox::about(m_ploginWindow,"提示","密码错误,请重新输入");
@@ -138,7 +141,14 @@ void Ckernel::DealLoginRs(unsigned int lSendIP, char *buf, int nlen)
     }
 }
 
-void Ckernel::slot_close()
+void Ckernel::slot_loginClose()
+{
+    qDebug()<<__func__;
+    delete m_ploginWindow;
+    m_ploginWindow=nullptr;
+}
+
+void Ckernel::slot_mainClose()
 {
     qDebug()<<__func__;
     delete m_maindialog;

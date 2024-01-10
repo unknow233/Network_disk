@@ -52,7 +52,8 @@ private:
     TcpServerMediator* m_serverMediator;
 #endif
 private slots:
-    void slot_close();
+    void slot_loginClose();
+    void slot_mainClose();
     void slot_ReadyData( unsigned int lSendIP , char* buf , int nlen );
     void slot_disConnect();
     //处理loginDialog的注册信号

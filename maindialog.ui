@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>731</width>
-    <height>555</height>
+    <width>742</width>
+    <height>571</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -151,11 +151,11 @@
    </item>
    <item>
     <widget class="QWidget" name="wdg_right" native="true">
-     <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <layout class="QVBoxLayout" name="verticalLayout_7">
       <item>
        <widget class="QStackedWidget" name="sw_page">
         <property name="currentIndex">
-         <number>0</number>
+         <number>2</number>
         </property>
         <widget class="QWidget" name="page_file">
          <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -299,211 +299,199 @@
          </layout>
         </widget>
         <widget class="QWidget" name="page_share">
-         <widget class="QTableWidget" name="tb_info_5">
-          <property name="geometry">
-           <rect>
-            <x>0</x>
-            <y>0</y>
-            <width>521</width>
-            <height>531</height>
-           </rect>
-          </property>
-          <property name="minimumSize">
-           <size>
-            <width>521</width>
-            <height>531</height>
-           </size>
-          </property>
-          <attribute name="horizontalHeaderStretchLastSection">
-           <bool>true</bool>
-          </attribute>
-          <attribute name="verticalHeaderStretchLastSection">
-           <bool>false</bool>
-          </attribute>
-          <column>
-           <property name="text">
-            <string>文件</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>大小</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>创建时间</string>
-           </property>
-          </column>
-         </widget>
+         <layout class="QVBoxLayout" name="verticalLayout_5">
+          <item>
+           <widget class="QTableWidget" name="tb_info_shared">
+            <property name="minimumSize">
+             <size>
+              <width>501</width>
+              <height>471</height>
+             </size>
+            </property>
+            <attribute name="horizontalHeaderStretchLastSection">
+             <bool>true</bool>
+            </attribute>
+            <attribute name="verticalHeaderStretchLastSection">
+             <bool>false</bool>
+            </attribute>
+            <column>
+             <property name="text">
+              <string>文件</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>大小</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>创建时间</string>
+             </property>
+            </column>
+           </widget>
+          </item>
+         </layout>
         </widget>
         <widget class="QWidget" name="page_translate">
-         <widget class="QTabWidget" name="tw_translate">
-          <property name="geometry">
-           <rect>
-            <x>0</x>
-            <y>0</y>
-            <width>521</width>
-            <height>531</height>
-           </rect>
-          </property>
-          <property name="currentIndex">
-           <number>2</number>
-          </property>
-          <widget class="QWidget" name="tab_up">
-           <attribute name="title">
-            <string>uping</string>
-           </attribute>
-           <layout class="QVBoxLayout" name="verticalLayout_4">
-            <item>
-             <widget class="QTableWidget" name="tb_info_uping">
-              <property name="minimumSize">
-               <size>
-                <width>381</width>
-                <height>341</height>
-               </size>
-              </property>
-              <attribute name="horizontalHeaderStretchLastSection">
-               <bool>true</bool>
-              </attribute>
-              <attribute name="verticalHeaderStretchLastSection">
-               <bool>false</bool>
-              </attribute>
-              <column>
-               <property name="text">
-                <string>文件</string>
-               </property>
-              </column>
-              <column>
-               <property name="text">
-                <string>大小</string>
-               </property>
-              </column>
-              <column>
-               <property name="text">
-                <string>创建时间</string>
-               </property>
-              </column>
-             </widget>
-            </item>
-           </layout>
-          </widget>
-          <widget class="QWidget" name="tab_loadown">
-           <attribute name="title">
-            <string>loadowning</string>
-           </attribute>
-           <layout class="QVBoxLayout" name="verticalLayout_3">
-            <item>
-             <widget class="QTableWidget" name="tb_info_loadowning">
-              <property name="minimumSize">
-               <size>
-                <width>381</width>
-                <height>341</height>
-               </size>
-              </property>
-              <attribute name="horizontalHeaderStretchLastSection">
-               <bool>true</bool>
-              </attribute>
-              <attribute name="verticalHeaderStretchLastSection">
-               <bool>false</bool>
-              </attribute>
-              <column>
-               <property name="text">
-                <string>文件</string>
-               </property>
-              </column>
-              <column>
-               <property name="text">
-                <string>大小</string>
-               </property>
-              </column>
-              <column>
-               <property name="text">
-                <string>创建时间</string>
-               </property>
-              </column>
-             </widget>
-            </item>
-           </layout>
-          </widget>
-          <widget class="QWidget" name="tab_over">
-           <attribute name="title">
-            <string>over</string>
-           </attribute>
-           <layout class="QVBoxLayout" name="verticalLayout_5">
-            <item>
-             <widget class="QTableWidget" name="tb_info_over">
-              <property name="minimumSize">
-               <size>
-                <width>499</width>
-                <height>487</height>
-               </size>
-              </property>
-              <attribute name="horizontalHeaderStretchLastSection">
-               <bool>true</bool>
-              </attribute>
-              <attribute name="verticalHeaderStretchLastSection">
-               <bool>false</bool>
-              </attribute>
-              <column>
-               <property name="text">
-                <string>文件</string>
-               </property>
-              </column>
-              <column>
-               <property name="text">
-                <string>大小</string>
-               </property>
-              </column>
-              <column>
-               <property name="text">
-                <string>创建时间</string>
-               </property>
-              </column>
-             </widget>
-            </item>
-           </layout>
-          </widget>
-         </widget>
+         <layout class="QVBoxLayout" name="verticalLayout_9">
+          <item>
+           <widget class="QTabWidget" name="tw_translate">
+            <property name="currentIndex">
+             <number>0</number>
+            </property>
+            <widget class="QWidget" name="tab_up">
+             <attribute name="title">
+              <string>uping</string>
+             </attribute>
+             <layout class="QVBoxLayout" name="verticalLayout_4">
+              <item>
+               <widget class="QTableWidget" name="tb_info_up">
+                <property name="minimumSize">
+                 <size>
+                  <width>501</width>
+                  <height>471</height>
+                 </size>
+                </property>
+                <attribute name="horizontalHeaderStretchLastSection">
+                 <bool>true</bool>
+                </attribute>
+                <attribute name="verticalHeaderStretchLastSection">
+                 <bool>false</bool>
+                </attribute>
+                <column>
+                 <property name="text">
+                  <string>文件</string>
+                 </property>
+                </column>
+                <column>
+                 <property name="text">
+                  <string>大小</string>
+                 </property>
+                </column>
+                <column>
+                 <property name="text">
+                  <string>创建时间</string>
+                 </property>
+                </column>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+            <widget class="QWidget" name="tab_loadown">
+             <attribute name="title">
+              <string>loadowning</string>
+             </attribute>
+             <layout class="QVBoxLayout" name="verticalLayout_6">
+              <item>
+               <widget class="QTableWidget" name="tb_info_loadown">
+                <property name="minimumSize">
+                 <size>
+                  <width>501</width>
+                  <height>471</height>
+                 </size>
+                </property>
+                <attribute name="horizontalHeaderStretchLastSection">
+                 <bool>true</bool>
+                </attribute>
+                <attribute name="verticalHeaderStretchLastSection">
+                 <bool>false</bool>
+                </attribute>
+                <column>
+                 <property name="text">
+                  <string>文件</string>
+                 </property>
+                </column>
+                <column>
+                 <property name="text">
+                  <string>大小</string>
+                 </property>
+                </column>
+                <column>
+                 <property name="text">
+                  <string>创建时间</string>
+                 </property>
+                </column>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+            <widget class="QWidget" name="tab_over">
+             <attribute name="title">
+              <string>over</string>
+             </attribute>
+             <layout class="QVBoxLayout" name="verticalLayout_3">
+              <item>
+               <widget class="QTableWidget" name="tb_info_over">
+                <property name="minimumSize">
+                 <size>
+                  <width>501</width>
+                  <height>471</height>
+                 </size>
+                </property>
+                <attribute name="horizontalHeaderStretchLastSection">
+                 <bool>true</bool>
+                </attribute>
+                <attribute name="verticalHeaderStretchLastSection">
+                 <bool>false</bool>
+                </attribute>
+                <column>
+                 <property name="text">
+                  <string>文件</string>
+                 </property>
+                </column>
+                <column>
+                 <property name="text">
+                  <string>大小</string>
+                 </property>
+                </column>
+                <column>
+                 <property name="text">
+                  <string>创建时间</string>
+                 </property>
+                </column>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </widget>
+          </item>
+         </layout>
         </widget>
         <widget class="QWidget" name="page_favorite">
-         <widget class="QTableWidget" name="tb_info_favorite">
-          <property name="geometry">
-           <rect>
-            <x>0</x>
-            <y>0</y>
-            <width>511</width>
-            <height>521</height>
-           </rect>
-          </property>
-          <property name="minimumSize">
-           <size>
-            <width>511</width>
-            <height>521</height>
-           </size>
-          </property>
-          <attribute name="horizontalHeaderStretchLastSection">
-           <bool>true</bool>
-          </attribute>
-          <attribute name="verticalHeaderStretchLastSection">
-           <bool>false</bool>
-          </attribute>
-          <column>
-           <property name="text">
-            <string>文件</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>大小</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>创建时间</string>
-           </property>
-          </column>
-         </widget>
+         <layout class="QVBoxLayout" name="verticalLayout_8">
+          <item>
+           <widget class="QTableWidget" name="tb_info_favorite">
+            <property name="minimumSize">
+             <size>
+              <width>501</width>
+              <height>471</height>
+             </size>
+            </property>
+            <attribute name="horizontalHeaderStretchLastSection">
+             <bool>true</bool>
+            </attribute>
+            <attribute name="verticalHeaderStretchLastSection">
+             <bool>false</bool>
+            </attribute>
+            <column>
+             <property name="text">
+              <string>文件</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>大小</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>创建时间</string>
+             </property>
+            </column>
+           </widget>
+          </item>
+         </layout>
         </widget>
        </widget>
       </item>

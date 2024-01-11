@@ -18,6 +18,7 @@ SOURCES += \
 
 HEADERS += \
     ckernel.h \
+    common.h \
     logindialog.h \
     maindialog.h \
     test.h

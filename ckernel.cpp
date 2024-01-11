@@ -11,12 +11,10 @@
 Ckernel::Ckernel(QObject *parent) : QObject(parent)
 {
     //m_maindialog=new MainDialog;//放在这里会导致只允许一个用户登录
-    //正常情况应该是再登录成功以后再创建
+    //正常情况应该是再登录成功以后再创建,信号的绑定也应该随着变化
     //注释代码需要改动
-    connect(m_maindialog,SIGNAL(SIG_close()),
-            this,SLOT(slot_mainClose()));
-    connect(m_ploginWindow,SIGNAL(SIG_loginClose()),
-            this,SLOT(slot_loginClose()));
+
+
     //创建中介者对象
     #ifdef server
     m_serverMediator=new TcpServerMediator;
@@ -49,6 +47,8 @@ Ckernel::Ckernel(QObject *parent) : QObject(parent)
             this,SLOT(slot_registRq(QString ,QString ,QString )));
     connect(m_ploginWindow,SIGNAL(SIG_LOGIN(QString ,QString )),
             this,SLOT(slot_loginRq(QString , QString )));
+    connect(m_ploginWindow,SIGNAL(SIG_loginClose()),
+            this,SLOT(slot_loginClose()));
     initFunMap();
 }
 
@@ -130,6 +130,8 @@ void Ckernel::DealLoginRs(unsigned int lSendIP, char *buf, int nlen)
     case login_success:{
         QMessageBox::about(m_ploginWindow,"提示","登录成功");
         m_maindialog=new MainDialog;
+        connect(m_maindialog,&MainDialog::SIG_mainClose,
+                this,&Ckernel::slot_mainClose);
         m_maindialog->setWindowTitle("网盘");
         m_maindialog->setWindowFlags(Qt::WindowMinMaxButtonsHint|Qt::WindowCloseButtonHint);
         m_maindialog->show();

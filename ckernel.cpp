@@ -5,7 +5,7 @@
 #include<QMessageBox>
 #include<windows.h>
 #include<packdef.h>
-
+#include <iostream>
 #define FunsMap(a) m_funs[a-_DEF_PACK_BASE]
 
 Ckernel::Ckernel(QObject *parent) : QObject(parent)
@@ -208,5 +208,82 @@ void Ckernel::slot_loginRq(QString tel, QString password)
     qDebug()<<QString::fromStdString(passwordTest);
     SendData((char*)&loginRq,sizeof(loginRq));
 }
+#include<QFile>
+#include<QTimeLine>
+void Ckernel::slot_UpFile(QString path, QString dir)
+{
+    qDebug()<<__func__;
+    QFileInfo qfileinfo(path);
+    //设置文件信息
+    FileInfo fileinfo;
+    fileinfo.size = qfileinfo.size();
+    //utf-8转为gb2312
+    char gbPath[1000];
+    Utf8ToGB2312(gbPath,1000,path);
+    fileinfo.pFile = fopen(gbPath,"rb");
+    fileinfo.name = qfileinfo.fileName();
+    fileinfo.dir =dir;
+    //fileinfo.time = ;
+    fileinfo.md5 = "d41d8cd98f00b204e9800998ecf8427e";
+    fileinfo.type = "text";
+    fileinfo.absolutePath = "/home/user/example.txt";
 
+    //用map保存文件信息key=id+时间戳
+    //map_TimeIdToFileinfo[...]=fileinfo;
+    //发送请求
+    STRU_UPLOAD_FILE_RQ uploadRq;
+    uploadRq.userid = 1;
+    uploadRq.size = 1024;
+    uploadRq.timestamp = 1629876543;
+    strcpy(uploadRq.fileName, "example.txt");
+    strcpy(uploadRq.dir, "/home/user/uploads");
+    strcpy(uploadRq.md5, "d41d8cd98f00b204e9800998ecf8427e");
+    strcpy(uploadRq.fileType, "text");
+    strcpy(uploadRq.time, "2022-08-23 12:34:56");
+
+}
+
+// QString -> char* gb2312
+ void Ckernel::Utf8ToGB2312( char* gbbuf , int nlen ,QString& utf8)
+{
+    //转码的对象
+    QTextCodec * gb2312code = QTextCodec::codecForName( "gb2312");
+    //QByteArray char 类型数组的封装类 里面有很多关于转码 和 写IO的操作
+    QByteArray ba = gb2312code->fromUnicode( utf8 );// Unicode -> 转码对象的字符集
+
+    strcpy_s ( gbbuf , nlen , ba.data() );
+}
+
+// char* gb2312 --> QString utf8
+QString Ckernel::GB2312ToUtf8( char* gbbuf )
+{
+    //转码的对象
+    QTextCodec * gb2312code = QTextCodec::codecForName( "gb2312");
+    //QByteArray char 类型数组的封装类 里面有很多关于转码 和 写IO的操作
+    return gb2312code->toUnicode( gbbuf );// 转码对象的字符集 -> Unicode
+}
+
+string Ckernel::getFileMD5(QString path)
+{
+    //打开文件，读取文件内容，读到md5类，生成md5
+    FILE* pFile = nullptr;
+    //fopen如果有中文支持ANSI编码使用ascii码
+    //path里面是utf8( qt默认的)编码
+    char buf[1000] = "";
+    Utf8ToGB2312( buf , 1000 , path );
+    pFile = fopen( buf , "rb" );//二进制只读if( ! pFile ){i
+    qDebug() << "file md5 open fail";
+    return string();
+
+    int len = 0;
+    MD5 md;
+    do{
+        //缓冲区，一次读多少，读多少次，文件指针返回值读成功次数
+        len = fread( buf ,1 , 1000 , pFile );
+        md.update(buf,len);
+
+    }while( len > 0 );
+    fclose(pFile);
+    qDebug()<<QString::fromStdString( md.toString());
+}
 

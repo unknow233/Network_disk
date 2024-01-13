@@ -8,6 +8,9 @@
 #include"TcpServerMediator.h"
 #include"md5.h"
 #include"logindialog.h"
+#include<common.h>
+#include<QTextCodec>
+
 //协议映射表:没有协议映射表的话,处理相应数据会使用switch,代码量大
 class Ckernel;
 typedef void(Ckernel::*FUN)(unsigned int lSendIP , char* buf , int nlen );
@@ -21,7 +24,15 @@ public:
            static Ckernel m_kernel;
         return &m_kernel;
     }
+   // QString -> char* gb2312
+   static void Utf8ToGB2312( char* gbbuf , int nlen ,QString& utf8);
 
+   // char* gb2312 --> QString utf8
+   static QString GB2312ToUtf8( char* gbbuf );
+
+   static std::string getFileMD5 ( QString path);
+
+   static const string GetMd5(string str);
 private:
     explicit Ckernel(QObject *parent = nullptr);
     ~Ckernel();
@@ -30,7 +41,6 @@ private:
    void initFunMap();
    //封装发送函数
    void SendData(char* buf,int size);
-   static const string GetMd5(string str);
    //注册回复
     void DealRegistRs(unsigned int lSendIP , char* buf , int nlen );
     //login 回复
@@ -46,7 +56,7 @@ private:
     TcpClientMediator* m_clientMediator;
     FUN m_funs[_DEF_PACK_COUNT];
     LoginDialog* m_ploginWindow;
-
+    std::map<int,FileInfo> map_TimeIdToFileinfo;
 
 #ifdef server
     TcpServerMediator* m_serverMediator;
@@ -60,6 +70,7 @@ private slots:
     void slot_registRq(QString name,QString tel,QString password );
     //处理loginDialog的login信号
     void slot_loginRq(QString tel,QString password );
+    void slot_UpFile(QString path, QString dir);
 };
 
 #endif // CKERNEL_H

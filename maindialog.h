@@ -17,6 +17,7 @@ public:
     void closeEvent(QCloseEvent *) override;
 signals:
     void SIG_mainClose();
+    void SIG_UpFile(QString path, QString dir);
 private slots:
     void on_pb_file_clicked();
 

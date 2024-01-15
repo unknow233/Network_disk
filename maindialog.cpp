@@ -94,7 +94,7 @@ void MainDialog::solt_upFolder()
 
 void MainDialog::solt_upFile()
 {
-    qDebug()<<__func__;
+    qDebug()<<"MainDialog::"<<__func__;
     QString path=QFileDialog::getOpenFileName(this,"选择文件","D:\\");
     QString dir=ui->lb_curPath->text();
     SIG_UpFile( path,  dir);//path为本地路径, dir为网盘路径

@@ -30,7 +30,7 @@ public:
    // char* gb2312 --> QString utf8
    static QString GB2312ToUtf8( char* gbbuf );
 
-   static std::string getFileMD5 ( QString path);
+   static string getFileMD5 ( QString path);
 
    static const string GetMd5(string str);
 private:

@@ -1,6 +1,7 @@
 #ifndef COMMON_H
 #define COMMON_H
 #include<QString>
+#include"net/packdef.h"
 ////////////////////文件信息/////////////////
 typedef  int PackType;
 struct FileInfo
@@ -30,7 +31,6 @@ struct FileInfo
 
 
 ////////////////////文件上传/////////////////
-#define _DEF_PACK_BASE                 (1000)
 //上传文件请求
 #define _DEF_PACK_UPLOAD_FILE_RQ       (_DEF_PACK_BASE + 4 )
 //上传文件回复

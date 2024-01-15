@@ -1,7 +1,7 @@
 #include<ckernel.h>
 #include <QApplication>
 #include "test.h"
-int main01(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
 //    Myclass cla;
 //    cla.fun1();

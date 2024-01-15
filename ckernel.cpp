@@ -132,6 +132,8 @@ void Ckernel::DealLoginRs(unsigned int lSendIP, char *buf, int nlen)
         m_maindialog=new MainDialog;
         connect(m_maindialog,&MainDialog::SIG_mainClose,
                 this,&Ckernel::slot_mainClose);
+        connect(m_maindialog,&MainDialog::SIG_UpFile,
+                this,&Ckernel::slot_UpFile);
         m_maindialog->setWindowTitle("网盘");
         m_maindialog->setWindowFlags(Qt::WindowMinMaxButtonsHint|Qt::WindowCloseButtonHint);
         m_maindialog->show();
@@ -165,7 +167,7 @@ void Ckernel::slot_ReadyData(unsigned int lSendIP, char *buf, int nlen)
     int index=type-_DEF_PACK_BASE;
     //判断type的合法性
     if(index>_DEF_PACK_COUNT||index<0){
-        qDebug()<<"type is not requested";
+        qDebug()<<"type is not requested, error type:"<<type;
     }
     else{ //即使type合法, 对应的协议表中也不一定有
         FUN pfun=FunsMap(type);
@@ -212,7 +214,7 @@ void Ckernel::slot_loginRq(QString tel, QString password)
 #include<QTimeLine>
 void Ckernel::slot_UpFile(QString path, QString dir)
 {
-    qDebug()<<__func__;
+    qDebug()<<Q_FUNC_INFO;
     QFileInfo qfileinfo(path);
     //设置文件信息
     FileInfo fileinfo;
@@ -221,10 +223,15 @@ void Ckernel::slot_UpFile(QString path, QString dir)
     char gbPath[1000];
     Utf8ToGB2312(gbPath,1000,path);
     fileinfo.pFile = fopen(gbPath,"rb");
+    if(fileinfo.pFile==nullptr){
+        qDebug()<<"获取文件失败";
+    }
     fileinfo.name = qfileinfo.fileName();
     fileinfo.dir =dir;
     //fileinfo.time = ;
-    fileinfo.md5 = "d41d8cd98f00b204e9800998ecf8427e";
+    string fileMD5=getFileMD5(path);//这里的路径用原来的即可, 转为gb2312在函数内部实现
+    fileinfo.md5 =QString::fromStdString(fileMD5);
+    qDebug()<<fileinfo.md5;
     fileinfo.type = "text";
     fileinfo.absolutePath = "/home/user/example.txt";
 
@@ -271,10 +278,11 @@ string Ckernel::getFileMD5(QString path)
     //path里面是utf8( qt默认的)编码
     char buf[1000] = "";
     Utf8ToGB2312( buf , 1000 , path );
-    pFile = fopen( buf , "rb" );//二进制只读if( ! pFile ){i
+    pFile = fopen( buf , "rb" );//二进制只读
+    if( !pFile ){
     qDebug() << "file md5 open fail";
     return string();
-
+}
     int len = 0;
     MD5 md;
     do{

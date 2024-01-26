@@ -57,7 +57,7 @@ struct STRU_UPLOAD_FILE_RQ
         memset( time , 0, sizeof(time) );
     }
     PackType type;
-    int timestamp;//时间戳用于区分不同任务
+    long long timestamp;//时间戳用于区分不同任务
     int userid; //服务器与时间戳配合,区分不同任务
     char fileName[_MAX_PATH_SIZE]; //上传文件名字
     int size;//大小

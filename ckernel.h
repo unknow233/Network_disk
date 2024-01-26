@@ -10,7 +10,7 @@
 #include"logindialog.h"
 #include<common.h>
 #include<QTextCodec>
-
+#include<string>
 //协议映射表:没有协议映射表的话,处理相应数据会使用switch,代码量大
 class Ckernel;
 typedef void(Ckernel::*FUN)(unsigned int lSendIP , char* buf , int nlen );
@@ -45,6 +45,8 @@ private:
     void DealRegistRs(unsigned int lSendIP , char* buf , int nlen );
     //login 回复
     void DealLoginRs(unsigned int lSendIP , char* buf , int nlen );
+    //处理文件上传回复
+    void DealUpFileRs(unsigned int lSendIP , char* buf , int nlen );
 signals:
 
 private:
@@ -56,7 +58,8 @@ private:
     TcpClientMediator* m_clientMediator;
     FUN m_funs[_DEF_PACK_COUNT];
     LoginDialog* m_ploginWindow;
-    std::map<int,FileInfo> map_TimeIdToFileinfo;
+    std::map<long long,FileInfo> map_TimeIdToFileinfo;
+    int m_id;
 
 #ifdef server
     TcpServerMediator* m_serverMediator;
@@ -70,7 +73,10 @@ private slots:
     void slot_registRq(QString name,QString tel,QString password );
     //处理loginDialog的login信号
     void slot_loginRq(QString tel,QString password );
+    //处理mainDialog的upfile信号
     void slot_UpFile(QString path, QString dir);
+    
+    
 };
 
 #endif // CKERNEL_H

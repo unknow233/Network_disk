@@ -82,21 +82,24 @@ void MainDialog::on_pb_create_clicked()
     m_pAddMenu->exec(QCursor::pos());//鼠标坐标
 }
 
-void MainDialog::solt_addFolder()
+void MainDialog::solt_PushButtonaddFolder()
 {
     qDebug()<<__func__;
+
 }
 
-void MainDialog::solt_upFolder()
+void MainDialog::solt_PushButtonupFolder()
 {
-    qDebug()<<__func__;
+     qDebug()<<__func__;
 }
 
-void MainDialog::solt_upFile()
+
+void MainDialog::solt_PushButtonupFile()
 {
     qDebug()<<"MainDialog::"<<__func__;
     QString path=QFileDialog::getOpenFileName(this,"选择文件","D:\\");
     QString dir=ui->lb_curPath->text();
     SIG_UpFile( path,  dir);//path为本地路径, dir为网盘路径
 }
+
 

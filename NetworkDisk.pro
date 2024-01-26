@@ -14,14 +14,12 @@ SOURCES += \
     logindialog.cpp \
     main.cpp \
     maindialog.cpp \
-    test.cpp
 
 HEADERS += \
     ckernel.h \
     common.h \
     logindialog.h \
     maindialog.h \
-    test.h
 
 FORMS += \
     logindialog.ui \

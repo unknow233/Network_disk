@@ -1,10 +1,12 @@
-#include<ckernel.h>
+#include "test.h"
+
 #include <QApplication>
+#pragma comment(lib, "user32.lib")
+
 int main(int argc, char *argv[])
 {
-//    Myclass cla;
-//    cla.fun1();
     QApplication a(argc, argv);
-    Ckernel* kernle=Ckernel::GetInstance();
+    test w;
+    w.show();
     return a.exec();
 }

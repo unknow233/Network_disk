@@ -1,4 +1,5 @@
 #include "ckernel.h"
+#include<netapi/mediator/INetMediator.h>
 #include<QFileInfo>
 #include<QApplication>
 #include<QSettings>
@@ -6,8 +7,9 @@
 #include<windows.h>
 #include<packdef.h>
 #include <iostream>
+#include<string.h>
 #define FunsMap(a) m_funs[a-_DEF_PACK_BASE]
-
+//
 Ckernel::Ckernel(QObject *parent) : QObject(parent)
 {
     //m_maindialog=new MainDialog;//放在这里会导致只允许一个用户登录
@@ -31,7 +33,7 @@ Ckernel::Ckernel(QObject *parent) : QObject(parent)
             this,SLOT(slot_disConnect()));
     connect(m_clientMediator,SIGNAL(SIG_ReadyData( unsigned int, char*, int)),
             this,SLOT(slot_ReadyData( unsigned int, char*, int)));
-    m_clientMediator->OpenNet("192.168.107.136");
+    m_clientMediator->OpenNet(_DEF_SERVER_IP);
     //m_maindialog->show();
     loadIniFile();
     //测试发送
@@ -137,13 +139,17 @@ void Ckernel::DealLoginRs(unsigned int lSendIP, char *buf, int nlen)
         m_maindialog->setWindowTitle("网盘");
         m_maindialog->setWindowFlags(Qt::WindowMinMaxButtonsHint|Qt::WindowCloseButtonHint);
         m_maindialog->show();
+        m_id=loginRs.userid;
 }
         break;
     case password_error:
         QMessageBox::about(m_ploginWindow,"提示","密码错误,请重新输入");
         break;
     }
+
 }
+
+
 
 void Ckernel::slot_loginClose()
 {
@@ -211,7 +217,8 @@ void Ckernel::slot_loginRq(QString tel, QString password)
     SendData((char*)&loginRq,sizeof(loginRq));
 }
 #include<QFile>
-#include<QTimeLine>
+#include<QDateTime>
+
 void Ckernel::slot_UpFile(QString path, QString dir)
 {
     qDebug()<<Q_FUNC_INFO;
@@ -228,26 +235,30 @@ void Ckernel::slot_UpFile(QString path, QString dir)
     }
     fileinfo.name = qfileinfo.fileName();
     fileinfo.dir =dir;
-    //fileinfo.time = ;
-    string fileMD5=getFileMD5(path);//这里的路径用原来的即可, 转为gb2312在函数内部实现
-    fileinfo.md5 =QString::fromStdString(fileMD5);
-    qDebug()<<fileinfo.md5;
-    fileinfo.type = "text";
-    fileinfo.absolutePath = "/home/user/example.txt";
-
-    //用map保存文件信息key=id+时间戳
-    //map_TimeIdToFileinfo[...]=fileinfo;
+    fileinfo.time = QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss");
+    fileinfo.md5 =QString::fromStdString(getFileMD5(path));
+    //文件类型为"file"
+    fileinfo.type = "file";
+    //对fileinfo结构体进行赋值
+    fileinfo.absolutePath =path;
     //发送请求
     STRU_UPLOAD_FILE_RQ uploadRq;
-    uploadRq.userid = 1;
-    uploadRq.size = 1024;
-    uploadRq.timestamp = 1629876543;
-    strcpy(uploadRq.fileName, "example.txt");
-    strcpy(uploadRq.dir, "/home/user/uploads");
-    strcpy(uploadRq.md5, "d41d8cd98f00b204e9800998ecf8427e");
-    strcpy(uploadRq.fileType, "text");
-    strcpy(uploadRq.time, "2022-08-23 12:34:56");
+    uploadRq.userid = m_id;
+    uploadRq.size = fileinfo.size;
+    //获取当前时间戳:
 
+    long long timestamp=QDateTime::currentDateTime().currentSecsSinceEpoch();
+     uploadRq.timestamp = timestamp;
+    //用map保存文件信息key=id+时间戳
+    long long key = uploadRq.userid * 10000000000 + uploadRq.timestamp;
+    map_TimeIdToFileinfo[key]=fileinfo;
+
+    strcpy(uploadRq.fileName, fileinfo.name.toStdString().c_str());
+    strcpy(uploadRq.dir, dir.toStdString().c_str());
+    strcpy(uploadRq.md5, fileinfo.md5.toStdString().c_str());
+    strcpy(uploadRq.fileType, "file");
+    strcpy(uploadRq.time, fileinfo.time.toStdString().c_str());
+    SendData((char*)&uploadRq,sizeof(uploadRq));
 }
 
 // QString -> char* gb2312
@@ -281,7 +292,7 @@ string Ckernel::getFileMD5(QString path)
     pFile = fopen( buf , "rb" );//二进制只读
     if( !pFile ){
     qDebug() << "file md5 open fail";
-    return string();
+    //return string();
 }
     int len = 0;
     MD5 md;
@@ -292,6 +303,6 @@ string Ckernel::getFileMD5(QString path)
 
     }while( len > 0 );
     fclose(pFile);
-    qDebug()<<QString::fromStdString( md.toString());
+    //return md.toString();
 }
 

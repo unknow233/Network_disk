@@ -29,9 +29,9 @@ private slots:
 
     void on_pb_create_clicked();
 
-    void solt_addFolder();
-    void solt_upFolder();
-    void solt_upFile();
+    void solt_PushButtonaddFolder();
+    void solt_PushButtonupFolder();
+    void solt_PushButtonupFile();
 private:
     Ui::MainDialog *ui;
     QMenu* m_pAddMenu;

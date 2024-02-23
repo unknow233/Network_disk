@@ -98,3 +98,7 @@ update t_file set f_count = f_count - 1 where t_file.f_id = old.f_id;
 delete from t_file where f_count = 0 and t_file.f_id = old.f_id; 
 end // 
 delimiter ;
+
+
+select * from t_user_file;
+insert into t_user_file ( u_id , f_id , f_dir , f_name, f_uploadtime ) values( 1 , 0 , '/', 'test.txt' , '2024-01-26 16:05:34');

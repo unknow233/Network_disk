@@ -1,6 +1,8 @@
 #ifndef COMMON_H
 #define COMMON_H
 #include<QString>
+#include<iostream>
+#include<memory>
 #include"net/packdef.h"
 ////////////////////文件信息/////////////////
 typedef  int PackType;
@@ -26,7 +28,7 @@ struct FileInfo
     int isPause; //暂停  0 1
 
     //文件指针
-    FILE* pFile;
+    std::shared_ptr<FILE> pFile;
 };
 
 

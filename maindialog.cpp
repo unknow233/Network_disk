@@ -27,11 +27,12 @@ MainDialog::MainDialog(QWidget *parent)
 
     //绑定槽函数
     connect(addFolder,SIGNAL(triggered(bool)),
-            this,SLOT(solt_addFolder()));
+            this,SLOT(solt_PushButtonaddFolder()));
+
             connect(upFile,SIGNAL(triggered(bool)),
-                    this,SLOT(solt_upFile()));
+                    this,SLOT(solt_PushButtonupFile()));
             connect(upFolder,SIGNAL(triggered(bool)),
-                    this,SLOT(solt_upFolder()));
+                    this,SLOT(solt_PushButtonupFolder()));
 }
 
 MainDialog::~MainDialog()

@@ -229,10 +229,13 @@ void Ckernel::slot_UpFile(QString path, QString dir)
     //utf-8转为gb2312
     char gbPath[1000];
     Utf8ToGB2312(gbPath,1000,path);
-    fileinfo.pFile = fopen(gbPath,"rb");
+
+    //FILE* pfile= fopen(gbPath,"rb");
+    fileinfo.pFile=std::make_shared<FILE>(*(fopen(gbPath,"rb")));
     if(fileinfo.pFile==nullptr){
         qDebug()<<"获取文件失败";
     }
+
     fileinfo.name = qfileinfo.fileName();
     fileinfo.dir =dir;
     fileinfo.time = QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss");
@@ -292,7 +295,7 @@ string Ckernel::getFileMD5(QString path)
     pFile = fopen( buf , "rb" );//二进制只读
     if( !pFile ){
     qDebug() << "file md5 open fail";
-    //return string();
+    return string();
 }
     int len = 0;
     MD5 md;
@@ -303,6 +306,6 @@ string Ckernel::getFileMD5(QString path)
 
     }while( len > 0 );
     fclose(pFile);
-    //return md.toString();
+    return md.toString();
 }
 

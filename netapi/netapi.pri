@@ -7,6 +7,7 @@ INCLUDEPATH+=$$PWD/net/
 INCLUDEPATH+=$$PWD/mediator/
 
 HEADERS += \
+    $$PWD/../base64.h \
     $$PWD/mediator/INetMediator.h \
     $$PWD/mediator/TcpClientMediator.h \
     $$PWD/mediator/TcpServerMediator.h \

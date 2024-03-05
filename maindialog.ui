@@ -155,7 +155,7 @@
       <item>
        <widget class="QStackedWidget" name="sw_page">
         <property name="currentIndex">
-         <number>0</number>
+         <number>2</number>
         </property>
         <widget class="QWidget" name="page_file">
          <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -338,7 +338,7 @@
           <item>
            <widget class="QTabWidget" name="tw_translate">
             <property name="currentIndex">
-             <number>0</number>
+             <number>1</number>
             </property>
             <widget class="QWidget" name="tab_up">
              <attribute name="title">
@@ -374,6 +374,21 @@
                   <string>创建时间</string>
                  </property>
                 </column>
+                <column>
+                 <property name="text">
+                  <string>新建列</string>
+                 </property>
+                </column>
+                <column>
+                 <property name="text">
+                  <string>进度</string>
+                 </property>
+                </column>
+                <column>
+                 <property name="text">
+                  <string/>
+                 </property>
+                </column>
                </widget>
               </item>
              </layout>
@@ -390,6 +405,9 @@
                   <width>501</width>
                   <height>471</height>
                  </size>
+                </property>
+                <property name="contextMenuPolicy">
+                 <enum>Qt::CustomContextMenu</enum>
                 </property>
                 <attribute name="horizontalHeaderStretchLastSection">
                  <bool>true</bool>
@@ -410,6 +428,21 @@
                 <column>
                  <property name="text">
                   <string>创建时间</string>
+                 </property>
+                </column>
+                <column>
+                 <property name="text">
+                  <string>速度</string>
+                 </property>
+                </column>
+                <column>
+                 <property name="text">
+                  <string>进度</string>
+                 </property>
+                </column>
+                <column>
+                 <property name="text">
+                  <string/>
                  </property>
                 </column>
                </widget>
